@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -47,29 +48,29 @@ public class ArticleController extends BaseController {
 
     @GetMapping(value = "")
     public String index(@RequestParam(value = "page", defaultValue = "1") int page,
-                        @RequestParam(value = "limit", defaultValue = "15") int limit, HttpServletRequest request) {
+                        @RequestParam(value = "limit", defaultValue = "15") int limit, Model model) {
         ContentVoExample contentVoExample = new ContentVoExample();
         contentVoExample.setOrderByClause("created desc");
         contentVoExample.createCriteria().andTypeEqualTo(Types.ARTICLE.getType());
         PageInfo<ContentVo> contentsPaginator = contentsService.getArticlesWithpage(contentVoExample, page, limit);
-        request.setAttribute("articles", contentsPaginator);
+        model.addAttribute("articles", contentsPaginator);
         return "admin/article_list";
     }
 
     @GetMapping(value = "/publish")
-    public String newArticle(HttpServletRequest request) {
+    public String newArticle(Model model) {
         List<MetaVo> categories = metasService.getMetas(Types.CATEGORY.getType());
-        request.setAttribute("categories", categories);
+        model.addAttribute("categories", categories);
         return "admin/article_edit";
     }
 
     @GetMapping(value = "/{cid}")
-    public String editArticle(@PathVariable String cid, HttpServletRequest request) {
+    public String editArticle(@PathVariable String cid, Model model) {
         ContentVo contents = contentsService.getContents(cid);
-        request.setAttribute("contents", contents);
+        model.addAttribute("contents", contents);
         List<MetaVo> categories = metasService.getMetas(Types.CATEGORY.getType());
-        request.setAttribute("categories", categories);
-        request.setAttribute("active", "article");
+        model.addAttribute("categories", categories);
+        model.addAttribute("active", "article");
         return "admin/article_edit";
     }
 

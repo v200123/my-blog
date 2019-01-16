@@ -50,7 +50,7 @@ mybatis:
   type-aliases-package: com.my.blog.website.dao
 
 server:
-  port: 8080
+  port: 80
   #  ssl:
   #    enabled: true
   #    key-store: classpath:www.just-coffee.cn.jks

@@ -1,6 +1,7 @@
 package com.my.blog.website;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
 @MapperScan("com.my.blog.website.dao")
 @SpringBootApplication
 @EnableTransactionManagement
+@EnableAdminServer
 public class CoreApplication {
     @Bean(initMethod = "init", destroyMethod = "close")
     @ConfigurationProperties(prefix = "spring.datasource")
