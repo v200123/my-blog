@@ -52,6 +52,8 @@ spring:
     content-type: text/html
     mode: HTML5
     cache: false
+  messages:
+    basename: i18n/login
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.my.blog.website.dao
