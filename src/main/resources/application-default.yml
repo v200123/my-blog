@@ -6,7 +6,7 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/tale?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
     password: 123456
-    initialSize: 5
+    initialSize: 10
     minIdle: 5
     maxActive: 20
     # 配置获取连接等待超时的时间
@@ -34,6 +34,13 @@ spring:
   #      - classpath:privileges.sql
 
   #    initialize: true
+#
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:80
+#        username: admin1
+#        password: 123456
 
 
   # thymeleaf
@@ -63,3 +70,8 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'

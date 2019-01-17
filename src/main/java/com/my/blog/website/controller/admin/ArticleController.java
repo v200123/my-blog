@@ -48,29 +48,29 @@ public class ArticleController extends BaseController {
 
     @GetMapping(value = "")
     public String index(@RequestParam(value = "page", defaultValue = "1") int page,
-                        @RequestParam(value = "limit", defaultValue = "15") int limit, Model model) {
+                        @RequestParam(value = "limit", defaultValue = "15") int limit, HttpServletRequest request) {
         ContentVoExample contentVoExample = new ContentVoExample();
         contentVoExample.setOrderByClause("created desc");
         contentVoExample.createCriteria().andTypeEqualTo(Types.ARTICLE.getType());
         PageInfo<ContentVo> contentsPaginator = contentsService.getArticlesWithpage(contentVoExample, page, limit);
-        model.addAttribute("articles", contentsPaginator);
+        request.setAttribute("articles", contentsPaginator);
         return "admin/article_list";
     }
 
     @GetMapping(value = "/publish")
-    public String newArticle(Model model) {
+    public String newArticle(HttpServletRequest request) {
         List<MetaVo> categories = metasService.getMetas(Types.CATEGORY.getType());
-        model.addAttribute("categories", categories);
+        request.setAttribute("categories", categories);
         return "admin/article_edit";
     }
 
     @GetMapping(value = "/{cid}")
-    public String editArticle(@PathVariable String cid, Model model) {
+    public String editArticle(@PathVariable String cid, HttpServletRequest request) {
         ContentVo contents = contentsService.getContents(cid);
-        model.addAttribute("contents", contents);
+        request.setAttribute("contents", contents);
         List<MetaVo> categories = metasService.getMetas(Types.CATEGORY.getType());
-        model.addAttribute("categories", categories);
-        model.addAttribute("active", "article");
+        request.setAttribute("categories", categories);
+        request.setAttribute("active", "article");
         return "admin/article_edit";
     }
 
