@@ -40,6 +40,8 @@ public class CoreApplication {
         /**
          * 配置Druid监控
          * @return bean
+         * <em></em>
+         *
          */
         @Bean
         public ServletRegistrationBean statServlet(){

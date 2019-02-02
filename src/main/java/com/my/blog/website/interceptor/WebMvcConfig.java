@@ -1,6 +1,6 @@
 package com.my.blog.website.interceptor;
 
-
+import java.awt.*;
 import com.my.blog.website.utils.TaleUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
@@ -28,6 +29,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(baseInterceptor);
     }
 
+
     /**
      * 添加静态资源文件，外部可以直接访问地址
      * @param registry
@@ -35,7 +37,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/**").addResourceLocations("file:"+ TaleUtils.getUploadFilePath()+"upload/");
+        System.out.println();
     }
+
+
     @Bean
     public LocaleResolver localeResolver(){
         return new NativeLocaleResolver();
